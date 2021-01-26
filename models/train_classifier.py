@@ -14,6 +14,7 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import classification_report
 
 
@@ -44,12 +45,11 @@ def build_model():
     pipeline = Pipeline([
             ('vect', CountVectorizer(tokenizer=tokenize)),
             ('tfidf', TfidfTransformer()),
-            ('clf', MultiOutputClassifier(KNeighborsClassifier()))
+            ('clf', MultiOutputClassifier(AdaBoostClassifier()))
         ])
     
     parameters = {
         'tfidf__use_idf': (True, False),
-        'clf__estimator__weights': ['uniform', 'distance']
     }
     
     cv = GridSearchCV(pipeline, param_grid=parameters, verbose = 5, n_jobs=2)
