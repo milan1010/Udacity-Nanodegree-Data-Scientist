@@ -46,8 +46,8 @@ def index():
     msg_len = df['message'].apply(lambda x: len(x.split(' ')))
     msg_serial = [i for i in range(len(df))] 
     
-    
-    
+    categories_total_msg = df.drop(columns=['id','message','original','genre']).sum(axis=1)
+    categories_total_msg_serial =  [i for i in range(len(df))] 
     
     
     
@@ -65,7 +65,7 @@ def index():
             'layout': {
                 'title': 'Number of words in each message',
                 'yaxis': {
-                    'title': "Word Count"
+                    'title': "Count"
                 },
                 'xaxis': {
                     'title': "Message S.No"
@@ -88,6 +88,25 @@ def index():
                 },
                 'xaxis': {
                     'title': "Genre"
+                }
+            }
+        },
+        
+                {
+            'data': [
+                Bar(
+                    x=categories_total_msg_serial,
+                    y=categories_total_msg
+                )
+            ],
+
+            'layout': {
+                'title': 'Number of categories in each message', 
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Message S.No"
                 }
             }
         }
