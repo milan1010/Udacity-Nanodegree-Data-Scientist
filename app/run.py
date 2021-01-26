@@ -43,9 +43,36 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    msg_len = df['message'].apply(lambda x: len(x.split(' ')))
+    msg_serial = [i for i in range(len(df))] 
+    
+    
+    
+    
+    
+    
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
+        {
+            'data': [
+                Bar(
+                    x=msg_serial,
+                    y=msg_len
+                )
+            ],
+
+            'layout': {
+                'title': 'Number of words in each message',
+                'yaxis': {
+                    'title': "Word Count"
+                },
+                'xaxis': {
+                    'title': "Message S.No"
+                }
+            }
+        },
+        
         {
             'data': [
                 Bar(
