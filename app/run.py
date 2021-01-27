@@ -43,9 +43,12 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    # Number of words in every message
     msg_len = df['message'].apply(lambda x: len(x.split(' ')))
     msg_serial = [i for i in range(len(df))] 
     
+    
+    # Number of categories every message belongs to
     categories_total_msg = df.drop(columns=['id','message','original','genre']).sum(axis=1)
     categories_total_msg_serial =  [i for i in range(len(df))] 
     
