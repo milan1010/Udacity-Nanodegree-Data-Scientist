@@ -19,6 +19,8 @@ from sklearn.metrics import classification_report
 
 
 def load_data(database_filepath):
+    """Loads data from sqlite database"""
+    
     engine = create_engine('sqlite:///{}'.format(database_filepath))
     df = pd.read_sql('select * from messages', engine)
     X = df['message']
@@ -29,6 +31,8 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    """Converts to lowercase, tokenizes & lemmatizes the text and returns an array of words"""
+    
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
     clean_tokens = []
@@ -42,6 +46,8 @@ def tokenize(text):
 
 
 def build_model():
+    """Creates a ML pipeline for training and uses grid search to find best parameters"""   
+    
     pipeline = Pipeline([
             ('vect', CountVectorizer(tokenizer=tokenize)),
             ('tfidf', TfidfTransformer()),
@@ -49,6 +55,7 @@ def build_model():
         ])
     
     parameters = {
+        'vect__ngram_range': ((1, 1), (1, 2)),
         'tfidf__use_idf': (True, False),
     }
     
@@ -57,14 +64,16 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """Finds precision, recall and other classification metrics for all the categories"""
+    
     Y_Pred = model.predict(X_test)
     print(classification_report(Y_test, Y_Pred, target_names=category_names))
 
 
 def save_model(model, model_filepath):
-    filename = model_filepath
-    with open(filename, 'wb') as f:
-        pickle.dump(model, f)
+    """Saves model to a pickle file at given location"""
+    
+    pickle.dump(model, open(model_filepath, 'wb'))
 
 
 def main():
