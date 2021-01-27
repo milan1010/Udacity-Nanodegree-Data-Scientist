@@ -14,9 +14,19 @@ Aim of this project is to classify tweets during a disaster into several categor
     `python run.py`
     
 
-3. Go to http://0.0.0.0:3001/
+3. Go to http://0.0.0.0:3001/git 
 
 ### Files:
-1. process_data.py extracts, transforms and loads the data to be fed into the machine learning pipeline.
-2. train_classifier.py loads the data and applies ML algorithm to train a model for classification of tweets.
-3. run.py generates the web app using Flask where input text gets classified into different categories.
+app
+| - template
+| |- master.html # main page of web app
+| |- go.html # classification result page of web app
+|- run.py # Flask file that runs app
+data
+|- disaster_categories.csv # data to process
+|- disaster_messages.csv # data to process
+|- process_data.py # extracts, transforms and loads the data to be fed into the machine learning pipeline.
+|- InsertDatabaseName.db # database to save clean data to
+models
+|- train_classifier.py # loads the data and applies ML algorithm to train a model for classification of tweets.
+|- classifier.pkl # saved model
