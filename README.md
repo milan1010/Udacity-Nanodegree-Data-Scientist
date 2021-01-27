@@ -28,6 +28,7 @@ Aim of this project is to classify tweets during a disaster into several categor
 |- run.py # Flask file that runs app
 
 2. data
+
 |- disaster_categories.csv # data to process
 
 
