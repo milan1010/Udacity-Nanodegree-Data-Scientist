@@ -14,7 +14,7 @@ Aim of this project is to classify tweets during a disaster into several categor
     `python run.py`
     
 
-3. Go to http://0.0.0.0:3001/cd a
+3. Go to http://0.0.0.0:3001/
 
 ### Files:
 1. process_data.py extracts, transforms and loads the data to be fed into the machine learning pipeline.
